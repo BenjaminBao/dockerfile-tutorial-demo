@@ -1,10 +1,13 @@
-from flask import Flask
+from flask import Flask, jsonify
 
-app = Flask(__name__)
+def create_app():
+    app = Flask(__name__)
 
-@app.route("/")
-def hello():
-    return "Hello from inside your Docker container!"
+    @app.route("/")
+    def hello():
+        return jsonify(status="ok")
+    
+    return app
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    create_app().run(host="0.0.0.0", port=5000)
